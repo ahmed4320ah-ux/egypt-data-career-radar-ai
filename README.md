@@ -1,17 +1,21 @@
 # Egypt Data Career Radar AI
 
-**Status: Work in progress.** An n8n project for finding early-career data and AI roles in Egypt and remote roles open to candidates based in Egypt. The target is internships, graduate roles, and roles that ask for 0–3 years of experience.
+**Status: Work in progress.** An n8n project for finding early-career data and AI roles in Egypt and remote roles open to candidates based in Egypt. It focuses on internships, graduate roles, and openings that ask for 0–3 years of experience.
 
 ## Workflows
 
-1. **Job Collector** reads public job feeds, normalizes listings, and checks a job fingerprint before saving them to Google Sheets. Listings with unclear experience requirements are flagged for review.
+1. **Job Collector** runs hourly, pulls jobs from Jooble Egypt and other public feeds, normalizes listings, and uses a job fingerprint to prevent duplicate rows in Google Sheets.
 2. **LinkedIn Email Alerts** extracts job links from alert emails received in Gmail. Candidates review the listing and apply from its official page.
-3. **CV Match Agent** uses Gemini to compare job requirements with two CV profiles and recommend the better fit, with matching and missing keywords.
+3. **CV Match Agent** uses Gemini to compare two CV profiles, quote available experience evidence, and flag incomplete descriptions for review. The employer-page enrichment currently supports allowlisted Henkel listings, with the original job data available as a fallback.
 
-## Integration status
+## Verified integrations
 
-- The Collector has run in n8n with its existing sources. Jooble Egypt awaits an API key and a live collection test.
-- Worklittle is configured in the working draft as a manual practice request and awaits credentials and verification. Practice mode runs without submitting an application.
-- This project aims to use free allowances where available. Hosting and provider quotas depend on the setup.
+- Jooble Egypt returned listings in a scheduled run. A repeat run produced no duplicate rows.
+- The Henkel employer-page lookup supplied live requirements to the CV matching workflow.
+- Worklittle practice mode reached the review step at zero cost. The project has not submitted a live application. The checked Henkel listing did not appear in the Worklittle search.
 
-Account credentials, personal CVs, and the live tracker are private.
+## Repository contents
+
+- [LinkedIn email parser](egypt-radar-linkedin-test.js), an n8n Code node snippet.
+
+Account credentials, CVs, and the live tracker are private. Hosting costs and provider quotas depend on the setup.
